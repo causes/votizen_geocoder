@@ -1,8 +1,8 @@
 #!/bin/bash
 
 TMP="/tmp/tiger-import.$$"
-SHPS="edges"
-DBFS="featnames addr"
+SHPS="addrfeat"
+DBFS="featnames"
 BASE=$(dirname $0)
 PATH=$PATH:$BASE
 SQL="$BASE/sql"
@@ -25,10 +25,10 @@ if [ x"$1" != x"" ]; then
     cat
 else
     # Otherwise, find all of the IDs from the contents of the directory structure.
-    ls $SOURCE/**/tl_*_edges.zip | while read file; do
+    ls $SOURCE/**/tl_*_addrfeat.zip | while read file; do
         file=$(basename $file)
         code=${file##tl_????_}
-        echo ${code%%_edges.zip}
+        echo ${code%%_addrfeat.zip}
     done
 fi | sort | while read code; do
     echo "--- $code"

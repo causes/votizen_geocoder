@@ -9,41 +9,31 @@ PRAGMA journal_mode=MEMORY;
 PRAGMA synchronous=OFF;
 PRAGMA cache_size=500000;
 PRAGMA count_changes=0;
-CREATE TEMPORARY TABLE "tiger_edges" (
-"statefp" varchar(2),
-"countyfp" varchar(3),
-"tlid" int8,
-"tfidl" int8,
-"tfidr" int8,
-"mtfcc" varchar(5),
+
+CREATE TEMPORARY TABLE "tiger_addrfeat" (
+"tlid" numeric(10,0),
+"aridl" varchar(22),
+"aridr" varchar(22),
+"linearid" varchar(22),
 "fullname" varchar(100),
-"smid" varchar(22),
-"lfromadd" varchar(12),
-"ltoadd" varchar(12),
-"rfromadd" varchar(12),
-"rtoadd" varchar(12),
+"lfromhn" varchar(12),
+"ltohn" varchar(12),
+"rfromhn" varchar(12),
+"rtohn" varchar(12),
 "zipl" varchar(5),
 "zipr" varchar(5),
-"featcat" varchar(1),
-"hydroflg" varchar(1),
-"railflg" varchar(1),
-"roadflg" varchar(1),
-"olfflg" varchar(1),
-"passflg" varchar(1),
-"divroad" varchar(1),
-"exttyp" varchar(1),
-"ttyp" varchar(1),
-"deckedroad" varchar(1),
-"artpath" varchar(1),
-"persist" varchar(1),
-"gcseflg" varchar(1),
+"edge_mtfcc" varchar(5),
+"parityl" varchar(1),
+"parityr" varchar(1),
+"plus4l" varchar(4),
+"plus4r" varchar(4),
+"lfromtyp" varchar(1),
+"ltotyp" varchar(1),
+"rfromtyp" varchar(1),
+"rtotyp" varchar(1),
 "offsetl" varchar(1),
-"offsetr" varchar(1),
-"tnidf" int8,
-"tnidt" int8,
-"the_geom" blob
-);
--- SELECT AddGeometryColumn('','edges','the_geom','-1','MULTILINESTRING',2);
+"offsetr" varchar(1));
+
 CREATE TEMPORARY TABLE "tiger_featnames" (
 "tlid" int8,
 "fullname" varchar(100),
@@ -63,16 +53,3 @@ CREATE TEMPORARY TABLE "tiger_featnames" (
 "linearid" varchar(22),
 "mtfcc" varchar(5),
 "paflag" varchar(1));
-CREATE TEMPORARY TABLE "tiger_addr" (
-"tlid" int8,
-"fromhn" varchar(12),
-"tohn" varchar(12),
-"side" varchar(1),
-"zip" varchar(5),
-"plus4" varchar(4),
-"fromtyp" varchar(1),
-"totyp" varchar(1),
-"fromarmid" int4,
-"toarmid" int4,
-"arid" varchar(22),
-"mtfcc" varchar(5));
