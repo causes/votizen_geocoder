@@ -8,7 +8,6 @@ Gem::Specification.new do |s|
     s.homepage      = "http://geocoder.us/"
     s.files         = ["lib/geocoder/us.rb"] + Dir["lib/geocoder/us/*"] + Dir["tests/*"]
     s.require_path  = "lib"
-    s.test_files    = "tests/run.rb"
-    s.has_rdoc      = true
+    s.test_files    = "test/run.rb"
     s.extra_rdoc_files  =   ["README.rdoc"]
 end

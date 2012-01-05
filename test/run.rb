@@ -1,5 +1,7 @@
 #!/usr/bin/ruby 
 
+require 'rubygems'
+
 $LOAD_PATH.unshift 'tests'
 $LOAD_PATH.unshift 'lib'
 
