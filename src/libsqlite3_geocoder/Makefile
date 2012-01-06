@@ -1,8 +1,9 @@
 all: libsqlite3_geocoder.so
 CC=gcc
-CFLAGS=-fPIC
+CFLAGS=-fPIC -O2 -Wall
+
 libsqlite3_geocoder.so: extension.o wkb_compress.o util.o metaphon.o levenshtein.o
-	$(CC) -fPIC -lsqlite3 -I/usr/include -lm -shared $^ -o $@ 
+	$(CC) $(CFLAGS) -I/usr/include -shared $^ -o $@ -lm -lsqlite3 
 
 test: test_wkb_compress test_levenshtein
 
