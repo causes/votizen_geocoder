@@ -32,7 +32,8 @@ CREATE TEMPORARY TABLE "tiger_addrfeat" (
 "rfromtyp" varchar(1),
 "rtotyp" varchar(1),
 "offsetl" varchar(1),
-"offsetr" varchar(1));
+"offsetr" varchar(1),
+"the_geom" blob);
 
 CREATE TEMPORARY TABLE "tiger_featnames" (
 "tlid" int8,
