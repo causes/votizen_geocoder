@@ -58,7 +58,7 @@ INSERT INTO feature
 --   linestrings).
 INSERT OR IGNORE INTO edge
     SELECT l.tlid, compress_wkb_line(the_geom) FROM
-        (SELECT DISTINCT tlid FROM linezip) AS l, tiger_addrfeat e
+        (SELECT DISTINCT tlid FROM linezip) AS l, tiger_edges e
         WHERE l.tlid=e.tlid AND fullname <> "" AND fullname IS NOT NULL;
 
 -- generate all ranges from the addr table, stripping off any non-digit
@@ -66,11 +66,11 @@ INSERT OR IGNORE INTO edge
 INSERT INTO range
     SELECT tlid, digit_suffix(lfromhn), digit_suffix(ltohn),
            nondigit_prefix(lfromhn), zipl, 'L'
-    FROM tiger_addrfeat
+    FROM tiger_addr
     UNION
     SELECT tlid, digit_suffix(rfromhn), digit_suffix(rtohn),
            nondigit_prefix(rfromhn), zipr, 'R'
-    FROM tiger_addrfeat;
+    FROM tiger_addr;
 END;
 
 DROP TABLE feature_bin;
