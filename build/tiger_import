@@ -15,8 +15,7 @@ shift
 mkdir -p $TMP || exit 1
 
 # Initialize the database if it doesn't exist.
-#[ ! -r $DATABASE ] && cat ${SQL}/{create,place}.sql | sqlite3 $DATABASE
-[ ! -r $DATABASE ] && cat ${SQL}/create.sql | sqlite3 $DATABASE
+[ ! -r $DATABASE ] && cat ${SQL}/{create,place}.sql | sqlite3 $DATABASE
  
 # Marshal the county directories to import.
 #
