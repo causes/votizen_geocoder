@@ -7,6 +7,7 @@ require 'set'
 require 'pp'
 require 'time'
 require 'thread'
+require 'iconv'
 
 require 'geocoder/us/address'
 require 'geocoder/us/metaphone'
@@ -632,6 +633,15 @@ module Geocoder::US
           [:geometry, :side, :tlid, :fid, :fid1, :fid2, :street_phone,
            :city_phone, :fromhn, :tohn, :paflag, :flipped, :street_score,
            :city_score, :priority, :fips_class, :fips_place, :status].include? k}
+      # convert street and city names from Latin-1 to UTF-8 if necessary
+      # only perform the conversion if non-ASCII characters are found
+      # ... you know. for performance.
+      # N.B. the city names from place.sql are already in UTF-8
+      [:street, :street1, :street2].each do |k|
+        if record[k] and record[k] =~ /[\x80-\xFF]/o
+          record[k] = Iconv.conv("LATIN1", "UTF8", record[k])
+        end
+      end
     end
 
     def best_places (address, places, canonicalize=false)
