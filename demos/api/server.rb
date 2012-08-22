@@ -3,7 +3,10 @@ require 'sinatra'
 require 'geocoder/us/database'
 require 'json'
 
+set :bind, 'localhost'
 set :port, 8080
+set :environment, :production
+set :logging, true
 @@db = Geocoder::US::Database.new(ARGV[0] || "/home/sderle/geocoder/california.db")
 
 get '/geocode.json' do
